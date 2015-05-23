@@ -1,0 +1,24 @@
+{
+  "name": "imtihan",
+  "version": "0.0.0",
+  "description": "gui for building Mocha-Chai tests",
+  "main": "src/imtihan.js",
+  "scripts": {
+    "test": "mocha spec/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/lucaswadedavis/imtihan"
+  },
+  "keywords": [
+    "Mocha",
+    "Chai",
+    "TDD",
+    "GUI"
+  ],
+  "author": "Lucas Wade Davis",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lucaswadedavis/imtihan/issues"
+  }
+}
