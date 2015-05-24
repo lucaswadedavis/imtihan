@@ -1,9 +1,17 @@
 var fs = require('fs');
 var express = require('express');
 var imtihan = require('./imtihan.js');
+var bodyParser = require('body-parser');
 
 var app = express();
 var router = express.Router();
+app.use(express.static('../client'));
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(bodyParser.json() );
+
+var jsonParser = bodyParser.json();
 
 var makeTestFile = function(){
   var indexFile = "../client/spec/index.html";
@@ -33,9 +41,17 @@ var runTestFile = function(){
 
 
 app.get('/', function(req, res){
+ res.send('It worked');
+});
+
+app.post('/test',function(req, res){
+  if(!req.body) { return res.sendStatus(400);}
   makeTestFile();
   runTestFile();
-  res.send('It worked');
+  console.log(req.body);
+  console.log(req.body.a);
+  res.send(req.body);
+  res.sendStatus(200);
 });
 
 var server = app.listen(8080, function(){

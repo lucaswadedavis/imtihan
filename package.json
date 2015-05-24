@@ -20,5 +20,8 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/lucaswadedavis/imtihan/issues"
+  },
+  "dependencies": {
+    "body-parser": "~1.12.4"
   }
 }
