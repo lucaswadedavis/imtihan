@@ -1,8 +1,8 @@
 var imtihan = {};
 
-imtihan.testFile = function(func,t){
-  func = func || 'x()';
+imtihan.testFile = function(t){
   t = t || {};
+  var func = t.func || 'x()';
   t.message = t.message || "should adhere to the shadow pact.";
   t.target = t.target || "x(42)";
   t.suffix = t.suffix || "to.be.a('string')";
