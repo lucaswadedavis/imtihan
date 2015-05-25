@@ -26,11 +26,49 @@ var app = function(state){
 
 app.display = function(state){
   var d = "";
-  d += "<input type = 'text' placeholder = 'filename'></input>";
+  d += app.display.inputs(state);
+  d += "<div><iframe src = 'spec/index.html' width='100%' height='50%' frameborder='0'></iframe></div>";
   return d;
 };
 
-app.build = function(state){
+app.display.inputs = function(state){
+  var fileNameId = magog.id();
+  var messageId = magog.id();
+  var targetId = magog.id();
+  var suffixId = magog.id();
+  var funcNameId = magog.id();
+  var submitId = magog.id();
+  var d = "";
+  d += "<input type = 'text' placeholder = 'filename' id='"+fileNameId+"'></input>";
+  d += "<input type = 'text' placeholder = 'function name' id='"+funcNameId+"'></input>";
+  d += "<input type = 'text' placeholder = 'message' id='"+messageId+"'></input>";
+  d += "<input type = 'text' placeholder = 'target' id='"+targetId+"'></input>";
+  d += "<input type = 'text' placeholder = 'suffix' id='"+suffixId+"'></input>";
+  d += "<input type = 'button' value = 'add' onclick='magog.eves."+submitId+"()' ></input>";
+
+  magog.eve(submitId,function(){
+    var fileName = $("#"+fileNameId).val(); 
+    var functionName = $("#"+funcNameId).val(); 
+    var message = $("#"+messageId).val(); 
+    var suffix = $("#"+suffixId).val();
+    var target = $("#"+targetId).val();
+    app.build({
+      funcName: functionName,
+      tests:[
+        {
+          message:message,
+          target:target,
+          suffix:suffix
+        }
+      ]
+    });
+
+  });
+  
+  return d;
+};
+
+app.build = function(test){
  var target = '/test/';
   var payload = [];
   payload.push({
@@ -43,6 +81,8 @@ app.build = function(state){
       }
     ]
   });
+  payload.push(test);
+
   $.post(target,{data:payload},function(data,status){
     console.log(data);
     console.log(status);

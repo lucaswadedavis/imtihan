@@ -1,5 +1,5 @@
 describe("a()",function(){
-  it("should be a...",function(){
-    expect(a('fnoe')).to.be(null);
+  it("things",function(){
+    expect(a(32)).to.equal(23);
    });
 });
