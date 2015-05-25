@@ -2,8 +2,8 @@ var imtihan = {};
 
 imtihan.testFile = function(t){
   t = t || [];
+  var d = "";
   for (var i=0;i<t.length;i++){
-    var d = "";
     d += 'describe("'+t[i].funcName+'",function(){\n';
       for (var j=0;j<t[i].tests.length;j++){
         d += '  it("'+t[i].tests[j].message+'",function(){\n';
@@ -16,7 +16,7 @@ imtihan.testFile = function(t){
 };
 
 
-imtihan.indexFile = function(){
+imtihan.indexFile = function(files){
   var d = "";
   d += "<!doctype html> \n";
   d += "    <html> \n";
@@ -37,9 +37,10 @@ imtihan.indexFile = function(){
   d += "          var should = chai.should(); \n";
   d += "            </script> \n";
   d += " \n";
-  d += "                <!-- include source files here... --> \n";
-  d += "                  <script src='../src/index.js'></script> \n";
-  d += " \n";
+  for (var i=0;i<files.length;i++){
+    d += "                  <script src='"+files[i]+"'></script> \n";
+  }
+    d += " \n";
   d += "                    <!-- include spec files here... --> \n";
   d += "                      <script src='test.js'></script> \n";
   d += " \n";

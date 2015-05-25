@@ -26,8 +26,9 @@ var app = function(state){
 
 app.display = function(state){
   var d = "";
+  d += "<h1>Imtihan</h1><p>easy, beautiful, fun testing</p>";
   d += app.display.inputs(state);
-  d += "<div><iframe src = 'spec/index.html' width='100%' height='50%' frameborder='0'></iframe></div>";
+  d += "<div><iframe src = 'spec/index.html' width='100%' height='50%' frameborder='0' id='mochaIframe'></iframe></div>";
   return d;
 };
 
@@ -39,12 +40,14 @@ app.display.inputs = function(state){
   var funcNameId = magog.id();
   var submitId = magog.id();
   var d = "";
+  d += "<div>";
   d += "<input type = 'text' placeholder = 'filename' id='"+fileNameId+"'></input>";
   d += "<input type = 'text' placeholder = 'function name' id='"+funcNameId+"'></input>";
   d += "<input type = 'text' placeholder = 'message' id='"+messageId+"'></input>";
   d += "<input type = 'text' placeholder = 'target' id='"+targetId+"'></input>";
   d += "<input type = 'text' placeholder = 'suffix' id='"+suffixId+"'></input>";
   d += "<input type = 'button' value = 'add' onclick='magog.eves."+submitId+"()' ></input>";
+  d += "</div>";
 
   magog.eve(submitId,function(){
     var fileName = $("#"+fileNameId).val(); 
@@ -76,8 +79,8 @@ app.build = function(test){
     tests:[
       {
         message:"should be a...",
-        target:"a('fnoe')",
-        suffix:"to.be(null)"
+        target:"a(10)",
+        suffix:"to.equal(20)"
       }
     ]
   });
@@ -86,6 +89,7 @@ app.build = function(test){
   $.post(target,{data:payload},function(data,status){
     console.log(data);
     console.log(status);
+    document.getElementById("mochaIframe").contentWindow.location.reload(true);
   });
 
 };

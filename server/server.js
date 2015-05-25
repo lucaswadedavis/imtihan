@@ -16,8 +16,10 @@ var jsonParser = bodyParser.json();
 var makeTestFile = function(tests){
   var indexFile = "../client/spec/index.html";
   var testFile = "../client/spec/test.js";
+  var files = [];
+  files.push("../src/index.js");
 
-  fs.writeFile(indexFile,imtihan.indexFile(),function(err){
+  fs.writeFile(indexFile,imtihan.indexFile(files),function(err){
     if (err){
       console.log(err);
     } else {
