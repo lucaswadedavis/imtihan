@@ -5,6 +5,10 @@
 <head>
 <title>Imtihan</title>
 <script type='text/javascript' src='./lib/jquery.js'></script>
+<script type='text/javascript' src='./lib/underscore.js'></script>
+<script type='text/javascript' src='./lib/rezi.js'></script>
+<script type='text/javascript' src='./lib/magog.js'></script>
+
 <script type='text/javascript'>
 
 $(function(){
@@ -14,12 +18,36 @@ $(function(){
 var state = {route:"main"};
 
 var app = function(state){
-  var target = '/test/';
-  var payload = {a:"A",b:"B"};
-  $.post(target,payload,function(data,status){
+  var d = "";
+  d += app.display(state);
+  //app.build(state); 
+  magog(d);
+};
+
+app.display = function(state){
+  var d = "";
+  d += "<input type = 'text' placeholder = 'filename'></input>";
+  return d;
+};
+
+app.build = function(state){
+ var target = '/test/';
+  var payload = [];
+  payload.push({
+    funcName:"a()",
+    tests:[
+      {
+        message:"should be a...",
+        target:"a('fnoe')",
+        suffix:"to.be(null)"
+      }
+    ]
+  });
+  $.post(target,{data:payload},function(data,status){
     console.log(data);
     console.log(status);
   });
+
 };
 
 </script>

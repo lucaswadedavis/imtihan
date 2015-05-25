@@ -1,18 +1,17 @@
 var imtihan = {};
 
 imtihan.testFile = function(t){
-  t = t || {};
-  var func = t.func || 'x()';
-  t.message = t.message || "should adhere to the shadow pact.";
-  t.target = t.target || "x(42)";
-  t.suffix = t.suffix || "to.be.a('string')";
-
-  var d = "";
-  d += 'describe("'+func+'",function(){\n';
-  d += '  it("'+t.message+'",function(){\n';
-  d += '    expect('+t.target+').'+t.suffix+';\n';
-  d += '   });\n';
-  d += '});\n';
+  t = t || [];
+  for (var i=0;i<t.length;i++){
+    var d = "";
+    d += 'describe("'+t[i].funcName+'",function(){\n';
+      for (var j=0;j<t[i].tests.length;j++){
+        d += '  it("'+t[i].tests[j].message+'",function(){\n';
+        d += '    expect('+t[i].tests[j].target+').'+t[i].tests[j].suffix+';\n';
+        d += '   });\n';
+      }
+    d += '});\n';
+  }
   return d;
 };
 

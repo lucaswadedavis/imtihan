@@ -13,7 +13,7 @@ app.use(bodyParser.json() );
 
 var jsonParser = bodyParser.json();
 
-var makeTestFile = function(){
+var makeTestFile = function(tests){
   var indexFile = "../client/spec/index.html";
   var testFile = "../client/spec/test.js";
 
@@ -25,7 +25,7 @@ var makeTestFile = function(){
     }
   });
 
-  fs.writeFile(testFile,imtihan.testFile(),function(err){
+  fs.writeFile(testFile,imtihan.testFile(tests),function(err){
     if (err){
       console.log(err);
     } else {
@@ -46,10 +46,8 @@ app.get('/', function(req, res){
 
 app.post('/test',function(req, res){
   if(!req.body) { return res.sendStatus(400);}
-  makeTestFile();
+  makeTestFile(req.body.data);
   runTestFile();
-  console.log(req.body);
-  console.log(req.body.a);
   res.send(req.body);
   res.sendStatus(200);
 });
